@@ -1,0 +1,86 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer-ui-router/uirouter-mixin.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="quill-editor/zigguratcms-quill-editor.html">
+<link rel="import" href="gallery/zigguratcms-gallery.html">
+<link rel="import" href="upload-files/zigguratcms-upload-files.html">
+<link rel="import" href="grid/zigguratcms-grid.html">
+<link rel="import" href="blog/zigguratcms-blog.html">
+<link rel="import" href="no-elem.html">
+
+
+<dom-module id="zigguratcms-element-stomper">
+
+    <script>
+
+        class ZigguratCMSElementStomper extends UiRouterMixin(ZigguratAdminBasicMixin(Polymer.GestureEventListeners(
+            Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element)))) {
+            static get is() {
+                return "zigguratcms-element-stomper";
+            }
+
+            static get properties() {
+                return {
+                    resource: Object,
+                    elementUuid: String,
+                    rowUuid: String,
+                    columnUuid: String,
+                    stompedUuid: String,
+                    elements: {
+                        type: Object,
+                        notify: true
+                    },
+                    uiRouterTransition: {
+                        type: Object,
+                        value: function () {
+                            return {}
+                        }
+                    },
+                    uiRouterParams: {
+                        type: Object,
+                        value: function () {
+                            return {}
+                        }
+                    }
+                }
+            }
+
+            static get observers() {
+                return [
+                    'setElem(stompedUuid, elements)'
+                ]
+            }
+
+            getData() {
+                for (var x = 0; x < this.elements.length; x++) {
+                    if (this.elements[x].uuid == this.stompedUuid) {
+                        return this.elements[x];
+                    }
+                }
+            }
+
+            setElem() {
+                var data = this.getData();
+                var node = document.createElement(data.type);
+                var keys = Object.keys(data);
+                for (var x = 0; x < keys.length; x++) {
+                    node[keys[x]] = data[keys[x]];
+                }
+                node.resourceUuid = this.resource.uuid;
+                node.resource = this.resource;
+                node.uiRouterTransition = this.uiRouterTransition;
+                node.uiRouterParams = this.uiRouterParams;
+                node.uiRouterResolvedData = this.uiRouterResolvedData;
+                node.elements = this.elements;
+                Polymer.dom(this).appendChild(node);
+            }
+
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+        }
+
+        customElements.define(ZigguratCMSElementStomper.is, ZigguratCMSElementStomper);
+
+    </script>
+</dom-module>

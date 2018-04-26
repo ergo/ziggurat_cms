@@ -1,0 +1,319 @@
+// Core variables and mixins
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+// Reset and dependencies
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/print";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/grid";
+@import '../node_modules/quill/dist/quill.core';
+@import '../node_modules/quill/dist/quill.snow';
+@import '../node_modules/quill/dist/quill.bubble';
+
+* {
+    box-sizing: border-box;
+}
+
+a, a:link, a:visited {
+    text-decoration: none;
+    color: #1976d2;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #0d47a1;
+}
+
+#main-uirouter-view {
+    display: block;
+    padding: 15px;
+    width: 100%;
+
+}
+
+uirouter-sref ::slotted(a), uirouter-sref a {
+
+    text-decoration: none;
+    color: #1976d2;
+
+    &:hover {
+        text-decoration: none;
+        color: #0d47a1;
+    }
+}
+
+.section-header {
+    margin: 0px;
+}
+
+.table {
+    display: table;
+
+    .row {
+        display: table-row;
+    }
+
+    .cell {
+        display: table-cell;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .table.responsive {
+        display: block;
+    }
+    .row.responsive {
+        display: block;
+        border-bottom: 1px solid #cccccc;
+        margin-bottom: 20px;
+    }
+    .cell.responsive {
+        display: block;
+    }
+}
+
+.table.default .header .cell {
+    border-bottom: 2px solid #2e6da4;
+}
+
+.table.default .header .cell {
+    padding: 10px;
+}
+
+.table.default .cell {
+    padding: 10px;
+    vertical-align: top;
+}
+
+.ql-toolbar {
+    position: absolute;
+    left: calc(50% - 225px);
+    top: -70px;
+    background-color: #ffffff;
+    display: none;
+    width: 450px;
+    &.active {
+        display: inline-block;
+    }
+}
+
+.ql-editor {
+    padding: 0;
+}
+
+.ql-editor .ql-video {
+    margin: 10px auto;
+}
+
+.ql-container.ql-snow {
+    border: 0;
+}
+
+app-header {
+    color: #ffffff;
+    background-color: #404040;
+}
+
+app-header paper-icon-button {
+    --paper-icon-button-ink-color: white;
+}
+
+app-drawer {
+
+    $drawerMixin: "{
+    background-color: #484848;
+    }";
+    --app-drawer-content-container: #{$drawerMixin};
+}
+
+.drawer-list {
+    background-color: #444444;
+    //width: 200px;
+    height: 100%; overflow: auto;
+}
+
+.drawer-list > a {
+    display: block;
+    padding: 5px 16px;
+    line-height: 40px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.drawer-list > a:hover {
+    background-color: #555555;
+}
+
+.drawer-list {
+    uirouter-sref {
+        a{
+            display: block;
+            text-decoration: none;
+            color: #ffffff;
+            line-height: 40px;
+            padding: 5px 16px;
+        }
+        a:hover {
+            background-color: #555555;
+        }
+    }
+
+    uirouter-sref-active.route-active a{
+        font-weight: bold;
+        background-color: #666666;
+    }
+
+}
+
+//.drawer-list uirouter-sref ::slotted(a), .drawer-list uirouter-sref a {
+//    display: block;
+//    text-decoration: none;
+//    color: #ffffff;
+//    line-height: 40px;
+//    padding: 5px 16px;
+//}
+
+.drawer-list .route-active uirouter-sref ::slotted(a), .drawer-list .route-active uirouter-sref a {
+
+}
+
+zigguratcms-resource-create-node-view {
+    paper-dropdown-menu, paper-listbox {
+        width: 250px;
+    }
+}
+
+zigguratcms-resource-edit-node-view {
+    paper-dropdown-menu, paper-listbox {
+        width: auto;
+        /*max-width: 400px;*/
+    }
+
+    .flashing {
+        animation: flasher 1s linear infinite;
+    }
+
+    @keyframes flasher {
+        50% {
+            opacity: 0;
+        }
+    }
+}
+
+zigguratcms-resource-list-view {
+    #resource-list-table {
+        width: 100%;
+    }
+
+    #resource-list-table .resource {
+        width: 100%;
+    }
+
+    #resource-list-table .actions {
+        min-width: 155px;
+    }
+}
+
+
+
+zigguratcms-grid {
+    .row-holder {
+        position: relative;
+        border: 1px solid transparent;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    .row-holder.active {
+        border: 1px dotted;
+    }
+
+    .column {
+        -webkit-transition: width 500ms ease-in-out;
+        -moz-transition: width 500ms ease-in-out;
+        -ms-transition: width 500ms ease-in-out;
+        -o-transition: width 500ms ease-in-out;
+        transition: width 500ms ease-in-out;
+    }
+
+    .row-holder > .controls {
+        display: none;
+    }
+
+    .row-holder.active > .controls {
+        display: block;
+    }
+
+    .row-holder > .controls {
+        top: -24px;
+        left: 15px;
+        position: absolute;
+        border-radius: 15px 15px 0px 0px;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #000000;
+        text-align: center;
+        padding: 0px 5px;
+        z-index: 2;
+    }
+}
+
+zigguratcms-column-holder {
+
+    position: relative;
+
+    a {
+        cursor: pointer;
+    }
+
+    paper-dropdown-menu {
+        width: 200px;
+    }
+
+    .column {
+        -webkit-transition: width 500ms ease-in-out;
+        -moz-transition: width 500ms ease-in-out;
+        -ms-transition: width 500ms ease-in-out;
+        -o-transition: width 500ms ease-in-out;
+        transition: width 500ms ease-in-out;
+    }
+
+    .column > .column-contents > .controls {
+        display: none;
+    }
+
+    .column.active > .column-contents > .controls {
+        display: block;
+    }
+
+    .column > .column-contents > .controls iron-icon {
+        --iron-icon-width: 18px;
+        --iron-icon-height: 18px;
+    }
+
+    .column-contents {
+        border: 1px solid transparent;
+    }
+
+    .active .column-contents {
+        border: 1px dashed rgba(0, 0, 0, 0.5);
+    }
+
+    .column > .column-contents > .controls {
+        position: absolute;
+        top: -24px;
+        border-radius: 15px 15px 0px 0px;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #000000;
+        text-align: center;
+        right: 15px;
+        padding: 0px 5px;
+        z-index: 2;
+    }
+}
+
+app-drawer-layout{
+    width: 100%;
+}

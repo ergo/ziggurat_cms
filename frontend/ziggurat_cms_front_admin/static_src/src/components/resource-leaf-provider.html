@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+
+<dom-module id="resource-leaf-provider">
+    <template>
+        <iron-ajax
+            id="ajax-navigator"
+            auto
+            url="[[url]]"
+            handle-as="json"
+            bubbles
+            content-type="application/json"
+            last-response="{{resources}}"
+            on-iron-ajax-response="handleResourceResponse"
+            on-iron-ajax-request="handleResourceRequest"
+            on-iron-ajax-error="handleResourceError"
+            debounce-duration="100"></iron-ajax>
+    </template>
+
+</dom-module>
+
+<script>
+
+    class ZigguratCMSAdminResourceLeafProvider extends ZigguratAdminBasicMixin(Polymer.GestureEventListeners(
+        Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior],Polymer.Element))) {
+        static get is() {
+            return "resource-leaf-provider";
+        }
+        static get properties() {
+            return {
+                url: String,
+                resources: {
+                    type: Object,
+                    notify: true
+                }
+            }
+        }
+        handleResourceResponse (event) {
+            event.stopPropagation();
+            this.fire('resource-leaf-provider-response', event.detail);
+        }
+        handleResourceRequest (event) {
+            event.stopPropagation();
+            this.fire('resource-leaf-provider-request', {});
+        }
+        handleResourceError (event) {
+            this.fire('resource-leaf-provider-error', {});
+        }
+    }
+
+    customElements.define(ZigguratCMSAdminResourceLeafProvider.is, ZigguratCMSAdminResourceLeafProvider);
+
+</script>

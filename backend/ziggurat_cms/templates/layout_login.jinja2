@@ -1,0 +1,49 @@
+{% import 'ziggurat_cms:templates/partials/ziggurat_form.jinja2' as form %}
+
+<div id="layout-login">
+    {% if request.user %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+
+                    {% if request.has_permission('admin_panel') %}
+                        <a href="{{request.route_path('admin_index')}}" class="btn btn-secondary">{% trans %}Administration panel{% endtrans %}</a>
+                    {% endif %}
+
+                    <a href="{{request.route_path('sign_out')}}" class="btn btn-secondary">{% trans %}Sign out{% endtrans %}</a>
+
+                    {% trans %}You are logged as{% endtrans %}: <strong>{{request.user.public_username}}</strong>
+                </p>
+            </div>
+        </div>
+
+    {% elif request.matched_route.name not in ('register', 'lost_password', 'lost_password_generate') %}
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{% trans %}Login via social account{% endtrans %}</h3>
+                <a href="{{request.route_path('social_auth', provider='facebook')}}" class="btn btn-secondary">Facebook</a>
+                <a href="{{request.route_path('social_auth', provider='google')}}" class="btn btn-secondary">Google</a>
+                <a href="{{request.route_path('social_auth', provider='twitter')}}" class="btn btn-secondary">Twitter</a>
+
+            </div>
+            <div class="col-md-6">
+                <h3>{% trans %}Log in{% endtrans %}</h3>
+
+                <form action="{{request.route_path('sign_in')}}" method="POST">
+                    <div class="form-group">
+                        {{form.render_form(layout_login_form)}}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary">{% trans %}Log In {% endtrans %}</button>
+                        <a href="{{request.route_path('register')}}" class="btn btn-secondary">{% trans %}Register here{% endtrans %}</a>
+                        <a href="{{request.route_path('lost_password')}}">{% trans %}Forgot password?{% endtrans %}</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    {% endif %}
+<hr/>
+</div>

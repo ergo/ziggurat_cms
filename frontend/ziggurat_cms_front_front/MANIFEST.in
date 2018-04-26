@@ -1,0 +1,5 @@
+recursive-include static_src *
+recursive-exclude static_src/bower_components *
+recursive-exclude static_src/node_modules *
+recursive-exclude static_src/build *
+

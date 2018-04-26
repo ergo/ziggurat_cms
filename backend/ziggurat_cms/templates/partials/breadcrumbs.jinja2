@@ -1,0 +1,21 @@
+{% macro render(request, breadcrumbs) -%}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ request.route_path('/') }}">
+                {% trans %}Index page{% endtrans %}
+            </a>
+        </li>
+        {% for node in breadcrumbs |reverse %}
+            <li class="breadcrumb-item">
+                {% if node.resource_type == 'zigguratcms-category-node' and not node.config['list_children']  %}
+                    {{ node.resource_name }}
+                {% else %}
+                    <a href="{{ request.route_path('object_slug',
+                        slug=node.current_slug) }}">
+                        {{ node.resource_name }}
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ol>
+{% endmacro %}

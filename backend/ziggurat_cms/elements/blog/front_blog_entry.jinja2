@@ -1,0 +1,10 @@
+<div class="blog entry ql-editor">
+    <div class="title">
+        <h1>{{ element.name or '' }}</h1>
+    </div>
+    <p class="date">{{ element.date_created.strftime('%Y-%m-%d %H:%M') }}</p>
+
+    <div class="contents">
+        {{ element.config.get('compiledHtml', '')  |safe }}
+    </div>
+</div>

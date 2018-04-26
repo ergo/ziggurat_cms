@@ -1,0 +1,40 @@
+{% macro render(request, menu_entries, position_class='dropdown-menu-right') %}
+
+    <div class="collapse navbar-collapse" id="top-navigation">
+        <ul class="navbar-nav mr-auto">
+            {% for entry in menu_entries %}
+                {% if entry['node'].resource_type == 'zigguratcms-category-node' and
+            not entry['node'].config['list_children'] %}
+                    <bootstrap-dropdown-toggler target-selector=".dropdown-menu">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle">
+                                {{ entry['node'].resource_name }}
+                            </a>
+                            <div class="dropdown-menu {{ position_class }}">
+                                {% for subentry in entry['children'].values() %}
+                                    <a class="dropdown-item"
+                                       href="{{ request.route_path('object_slug',slug=subentry['node'].current_slug) }}">
+                                        {{ subentry['node'].resource_name }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                    </bootstrap-dropdown-toggler>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{ request.route_path('object_slug',
+                        slug=entry['node'].current_slug) }}"
+                           class="nav-link">
+                            {{ entry['node'].resource_name }}
+                        </a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+    </div>
+
+
+{%- endmacro %}
+

@@ -1,0 +1,10 @@
+<paper-gallery class="zigguratcms-gallery">
+    {% for image in element.images %}
+        <paper-gallery-item slot="entries"
+                            show-list
+                            placeholder="data:image/jpeg;base64,{{ image.base64_miniature }}"
+                            src="{{ request.static_url('ziggurat_cms:uploads/') }}/{{ image.upload_path }}/{{ image.slug }}"
+                            title="{{ image.name }}"
+                            description="{{ image.description }}"></paper-gallery-item>
+    {% endfor %}
+</paper-gallery>

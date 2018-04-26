@@ -1,0 +1,115 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Administration</title>
+    <meta name="description" content="CMS Administration panel">
+
+    <link rel="icon"
+          href="{{ request.static_url('ziggurat_cms:static/admin/bundled/images/favicon.ico') }}">
+
+{#    <!-- See https://goo.gl/OOhYW5 -->#}
+{#    <link rel="manifest"#}
+{#          href="{{ request.static_url('ziggurat_cms:static/admin/bundled/manifest.json') }}">#}
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#3f51b5">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="My App">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My App">
+
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon"
+          href="{{ request.static_url('ziggurat_cms:static/admin/bundled/images/manifest/icon-48x48.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72"
+          href="{{ request.static_url('ziggurat_cms:static/admin/bundled/images/manifest/icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="96x96"
+          href="{{ request.static_url('ziggurat_cms:static/admin/bundled/images/manifest/icon-96x96.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144"
+          href="{{ request.static_url('ziggurat_cms:static/admin/bundled/images/manifest/icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="192x192"
+          href="{{ request.static_url('ziggurat_cms:static/admin/bundled/images/manifest/icon-192x192.png') }}">
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage"
+          content="{{ request.static_url('ziggurat_cms:static/admin/bundled/images/manifest/icon-144x144.png') }}">
+    <meta name="msapplication-TileColor" content="#3f51b5">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script src="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_admin/bower_components/webcomponentsjs/webcomponents-loader.js') }}"></script>
+    <link href="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_admin/css/application.css') }}"
+          rel="stylesheet">
+    <link rel="import"
+          href="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_admin/src/zigguratcms-admin.html') }}">
+
+    <style>
+        html{
+            min-height: 100vh;
+        }
+        zigguratcms-admin{
+            min-height: 100vh;
+            display: flex;
+        }
+        body {
+            min-height: 100vh;
+            height: 100vh;
+            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #373a3c;
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <script>
+        window.APP_CONFIG = {
+            baseUrl: "{{ request.route_path('/')[:-1] }}",
+            apiUrl: "{{ request.route_path('api_objects',version='0.1', object='')[:-1] }}",
+            applicationUUID: null,
+            organizationUUID: null,
+            possibleWebComponents: {{ possible_web_components |tojson|safe}},
+            elementMappings: {{ element_mappings |tojson|safe}},
+            nodeMappings: {{ node_mappings |tojson|safe}}
+        }
+        {% if request.context.organization %}
+            window.APP_CONFIG.organizationUUID = '{{ request.context.organization.uuid }}';
+        {% endif %}
+        {% if request.context.application %}
+            window.APP_CONFIG.applicationUUID = '{{ request.context.application.uuid }}';
+        {% endif %}
+        window.USER_UUID = null;
+        {% if request.user %}
+            window.USER_UUID = '{{ request.user.uuid }}';
+        {% endif %}
+        window.TRANSLATION_LANGUAGE = 'pl';
+        window.TRANSLATIONS = {pl:{}, en:{}};
+    </script>
+</head>
+<body>
+
+
+<zigguratcms-admin user-uuid=""></zigguratcms-admin>
+<!-- Built with love using Polymer Starter Kit -->
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% macro render_nav_nodes(request, menu_entries) %}
+    {% for entry in menu_entries %}
+        {% if entry['node'].resource_type == 'zigguratcms-category-node' and
+        not entry['node'].config['list_children'] %}
+
+            <div class="card">
+                <div class="card-header">
+                    {{ entry['node'].resource_name }}
+                </div>
+                {{ render_nav_nodes(entry['children'].values()) }}
+            </div>
+
+
+        {% else %}
+            <a href="{{ request.route_path('object_slug',
+                        slug=entry['node'].current_slug) }}"
+               class="list-group-item">
+                {{ entry['node'].resource_name }}
+            </a>
+        {% endif %}
+    {% endfor %}
+{%- endmacro %}
+
+{% macro render(request, current_resource, items) %}
+
+    {% if items %}
+
+        <div class="navigation top card" id="navigation-side-menu">
+            <div class="list-group list-group-flush">
+                {#        {% if not is_index %}#}
+                {#            <a href="{{ menu_parent_link(request, breadcrumbs) }}"#}
+                {#               class="list-group-item nav-backlink">#}
+                {#                {% trans %}Go Back{% endtrans %}#}
+                {#            </a>#}
+                {#        {% endif %}#}
+
+
+                {% if current_resource.resource_type != 'zigguratcms-category-node' %}
+
+                    {{ render_nav_nodes(request, items.values()) }}
+
+                {% endif %}
+            </div>
+        </div>
+
+    {% endif %}
+
+{%- endmacro %}

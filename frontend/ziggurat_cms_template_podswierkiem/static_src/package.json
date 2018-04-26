@@ -1,0 +1,42 @@
+{
+    "name": "polymer-starter-kit-custom-build",
+    "version": "0.0.0",
+    "description": "A starting point for Polymer 1.0 custom build apps",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:PolymerElements/generator-polymer-init-custom-build"
+    },
+    "license": "http://polymer.github.io/LICENSE.txt",
+    "bugs": {
+        "url": "https://github.com/PolymerElements/generator-polymer-init-custom-build/issues"
+    },
+    "engines": {
+        "node": ">=4.0"
+    },
+    "scripts": {
+        "build": "gulp",
+        "watch": "gulp watch",
+        "bower": "bower install"
+    },
+    "private": true,
+    "devDependencies": {},
+    "dependencies": {
+        "babel-loader": "^6.2.8",
+        "bootstrap": "v4.0.0-alpha.6",
+        "commonjs": "0.0.1",
+        "del": "^2.2.1",
+        "gulp": "github:gulpjs/gulp#4.0",
+        "gulp-batch": "^1.0.5",
+        "gulp-crisper": "^1.1.0",
+        "gulp-if": "^2.0.1",
+        "gulp-imagemin": "^3.0.1",
+        "gulp-sass": "^3.0.0",
+        "gulp-vulcanize": "^6.1.0",
+        "gulp-watch": "^4.3.9",
+        "gulp-webpack": "^1.5.0",
+        "merge-stream": "^1.0.0",
+        "node-sass": "^4.1.1",
+        "plylog": "^0.4.0",
+        "bower": "^1.8.0"
+    }
+}

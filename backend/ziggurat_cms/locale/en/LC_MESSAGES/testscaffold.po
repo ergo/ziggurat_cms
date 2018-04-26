@@ -1,0 +1,429 @@
+#
+# English translations for PACKAGE package
+# This file is distributed under the same license as the PACKAGE package.
+# ergo <info@appenlight.com>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: ziggurat_cms 1.0\n"
+"POT-Creation-Date: 2016-11-18 13:10+0100\n"
+"PO-Revision-Date: 2016-11-18 11:33+0100\n"
+"Last-Translator: ergo <info@appenlight.com>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Lingua 3.8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ziggurat_cms/subscribers.py:44
+msgid ""
+"No external user id found? Perhaps permissions for authentication are set "
+"incorrectly"
+msgstr ""
+"No external user id found? Perhaps permissions for authentication are set "
+"incorrectly"
+
+#: ziggurat_cms/subscribers.py:61
+msgid "Your external identity is now connected with your account"
+msgstr "Your external identity is now connected with your account"
+
+#: ziggurat_cms/views/index.py:25 ziggurat_cms/views/index.py:93
+msgid "You can sign in with your new password."
+msgstr "You can sign in with your new password."
+
+#: ziggurat_cms/views/index.py:49
+#, fuzzy, python-format
+msgid "${project} :: New password request"
+msgstr "ziggurat_cms :: New password request"
+
+#: ziggurat_cms/views/index.py:60
+msgid ""
+"Password reset email had been sent. Please check your mailbox for further "
+"instructions.If you can't see the message please check your spam box."
+msgstr ""
+"Password reset email had been sent. Please check your mailbox for further "
+"instructions.If you can't see the message please check your spam box."
+
+#: ziggurat_cms/views/index.py:160
+#, fuzzy, python-format
+msgid "${project} :: Start information"
+msgstr "ziggurat_cms :: Start information"
+
+#: ziggurat_cms/views/index.py:169
+msgid "You have successfully registered."
+msgstr "You have successfully registered."
+
+#: ziggurat_cms/views/auth.py:35
+msgid "Signed in"
+msgstr "Signed in"
+
+#: ziggurat_cms/views/auth.py:62
+msgid "Signed out"
+msgstr "Signed out"
+
+#: ziggurat_cms/views/auth.py:87
+msgid ""
+"Something went wrong when accessing third party provider - please try again"
+msgstr ""
+"Something went wrong when accessing third party provider - please try again"
+
+#: ziggurat_cms/views/auth.py:138
+msgid ""
+"You need to finish registration process to bind your external identity to "
+"your account or sign in to existing account"
+msgstr ""
+"You need to finish registration process to bind your external identity to "
+"your account or sign in to existing account"
+
+#: ziggurat_cms/views/admin/users.py:55
+msgid "User created."
+msgstr "User created."
+
+#: ziggurat_cms/views/admin/groups.py:58
+msgid "Group created."
+msgstr "Group created."
+
+#: ziggurat_cms/views/admin/groups.py:96
+msgid "Group updated."
+msgstr "Group updated."
+
+#: ziggurat_cms/views/admin/celery.py:34
+msgid "Task sent"
+msgstr "Task sent"
+
+#: ziggurat_cms/views/shared/users.py:94
+msgid "Permission granted for user."
+msgstr "Permission granted for user."
+
+#: ziggurat_cms/views/shared/users.py:107
+msgid "Permission withdrawn from user."
+msgstr "Permission withdrawn from user."
+
+#: ziggurat_cms/views/shared/entries.py:59
+msgid "Entry removed."
+msgstr "Entry removed."
+
+#: ziggurat_cms/views/shared/groups.py:62
+msgid "Group removed."
+msgstr "Group removed."
+
+#: ziggurat_cms/views/shared/groups.py:75
+msgid "Permission granted for group."
+msgstr "Permission granted for group."
+
+#: ziggurat_cms/views/shared/groups.py:88
+msgid "Permission withdrawn from group."
+msgstr "Permission withdrawn from group."
+
+#: ziggurat_cms/views/shared/groups.py:94
+msgid "User added to group."
+msgstr "User added to group."
+
+#: ziggurat_cms/views/shared/groups.py:104
+msgid "User removed from group."
+msgstr "User removed from group."
+
+#: ziggurat_cms/templates/layout.jinja2:44
+msgid ""
+"Test\n"
+"                Scaffold"
+msgstr ""
+
+#: ziggurat_cms/templates/layout.jinja2:74
+msgid "No content"
+msgstr ""
+
+#: ziggurat_cms/templates/layout_login.jinja2:8
+msgid "You are logged as"
+msgstr ""
+
+#: ziggurat_cms/templates/layout_login.jinja2:12
+msgid "Administration panel"
+msgstr ""
+
+#: ziggurat_cms/templates/layout_login.jinja2:25
+#: ziggurat_cms/templates/auth/register.jinja2:19
+msgid "Login via social account"
+msgstr ""
+
+#: ziggurat_cms/templates/layout_login.jinja2:32
+msgid "Log in"
+msgstr ""
+
+#: ziggurat_cms/templates/layout_login.jinja2:40
+#: ziggurat_cms/templates/auth/register.jinja2:27
+msgid "Register"
+msgstr ""
+
+#: ziggurat_cms/templates/layout_login.jinja2:41
+#, fuzzy
+msgid "Forgot password?"
+msgstr "Confirm password"
+
+#: ziggurat_cms/templates/index.jinja2:6
+msgid "This is the index page content"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/layout.jinja2:12
+msgid "Back to front page"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/layout.jinja2:15
+msgid "Admin panel"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/layout.jinja2:18
+msgid "List users"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/layout.jinja2:21
+msgid "List groups"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/layout.jinja2:24
+msgid "Celery test"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/celery.jinja2:8
+msgid ""
+"Celery\n"
+"                    test"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/celery.jinja2:12
+msgid ""
+"You can test celery integration\n"
+"                    here"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/celery.jinja2:16
+msgid ""
+"Send\n"
+"                    task"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/index.jinja2:8
+msgid ""
+"Application\n"
+"                    statistics"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/index.jinja2:12
+msgid "Registered users"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/index.jinja2:15
+msgid "Last registered"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/index.jinja2:20
+msgid ""
+"No one registered yet\n"
+"                            "
+msgstr ""
+
+#: ziggurat_cms/templates/admin/index.jinja2:26
+msgid "Last logged"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/index.jinja2:31
+msgid ""
+"No one logged in yet\n"
+"                            "
+msgstr ""
+
+#: ziggurat_cms/templates/admin/relation_remove.jinja2:11
+#, fuzzy
+msgid "Confirm operation"
+msgstr "Confirm password"
+
+#: ziggurat_cms/templates/admin/relation_remove.jinja2:17
+msgid "Delete"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/relation_remove.jinja2:19
+msgid "Delete membership of"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/relation_remove.jinja2:19
+msgid "in"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/relation_remove.jinja2:27
+#, fuzzy
+msgid "Confirm"
+msgstr "Confirm password"
+
+#: ziggurat_cms/templates/admin/users/edit.jinja2:12
+msgid "Create a new user"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/users/edit.jinja2:14
+msgid "Editing "
+msgstr ""
+
+#: ziggurat_cms/templates/admin/users/edit.jinja2:34
+msgid "Create"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/users/edit.jinja2:36
+msgid "Update"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/users/edit.jinja2:49
+#: ziggurat_cms/templates/admin/groups/edit.jinja2:52
+#, fuzzy
+msgid "Permissions"
+msgstr "Permission"
+
+#: ziggurat_cms/templates/admin/users/edit.jinja2:58
+#, fuzzy
+msgid "Add permission"
+msgstr "Permission"
+
+#: ziggurat_cms/templates/admin/users/index.jinja2:9
+msgid "Browse users"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/edit.jinja2:12
+msgid "Create a new group"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/edit.jinja2:14
+msgid "Editing"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/edit.jinja2:29
+msgid "Create group"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/edit.jinja2:31
+msgid "Update group"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/edit.jinja2:42
+#, fuzzy
+msgid "Group Members"
+msgstr "Group removed."
+
+#: ziggurat_cms/templates/admin/groups/edit.jinja2:44
+msgid "Add/remove members"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/edit.jinja2:58
+#, fuzzy
+msgid "Add Permission"
+msgstr "Permission"
+
+#: ziggurat_cms/templates/admin/groups/index.jinja2:9
+msgid "Groups"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/users_list.jinja2:10
+msgid "Add a new user to"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/users_list.jinja2:18
+msgid "Assign user"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/users_list.jinja2:19
+msgid "Loading"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/users_list.jinja2:21
+msgid "No Results Found"
+msgstr ""
+
+#: ziggurat_cms/templates/admin/groups/users_list.jinja2:28
+msgid "Members of"
+msgstr ""
+
+#: ziggurat_cms/templates/user/auth_tokens.jinja2:5
+msgid "Authentication tokens"
+msgstr ""
+
+#: ziggurat_cms/templates/auth/register.jinja2:13
+msgid "Log In"
+msgstr ""
+
+#: ziggurat_cms/templates/auth/register.jinja2:15
+#: ziggurat_cms/templates/auth/lost_password.jinja2:14
+msgid "Return to index page"
+msgstr ""
+
+#: ziggurat_cms/templates/auth/lost_password.jinja2:8
+#, fuzzy
+msgid "Lost Password"
+msgstr "Password"
+
+#: ziggurat_cms/templates/auth/lost_password.jinja2:12
+#, fuzzy
+msgid "Get new password"
+msgstr "Confirm password"
+
+#: ziggurat_cms/templates/emails/lost_password.jinja2:1
+msgid "Password change request"
+msgstr ""
+
+#: ziggurat_cms/templates/emails/lost_password.jinja2:2
+msgid "You can generate a new password by clicking following URL:"
+msgstr ""
+
+#: ziggurat_cms/templates/emails/lost_password.jinja2:10
+msgid "This link expires in 10 minutes from the moment you filled in your form"
+msgstr ""
+
+#: ziggurat_cms/templates/emails/lost_password.jinja2:11
+msgid "If you didn't request new password please ignore this email"
+msgstr ""
+
+#: ziggurat_cms/validation/schemes.py:48
+msgid "Only administrator can change usernames"
+msgstr "Only administrator can change usernames"
+
+#: ziggurat_cms/validation/schemes.py:52
+msgid "User already exists in database"
+msgstr "User already exists in database"
+
+#: ziggurat_cms/validation/schemes.py:62
+msgid "Email already exists in database"
+msgstr "Email already exists in database"
+
+#: ziggurat_cms/validation/schemes.py:101
+msgid "Group already exists in database"
+msgstr "Group already exists in database"
+
+#: ziggurat_cms/validation/forms.py:39
+msgid "User name"
+msgstr "User name"
+
+#: ziggurat_cms/validation/forms.py:45 ziggurat_cms/validation/forms.py:65
+#: ziggurat_cms/validation/forms.py:82 ziggurat_cms/validation/forms.py:101
+msgid "Password"
+msgstr "Password"
+
+#: ziggurat_cms/validation/forms.py:51 ziggurat_cms/validation/forms.py:74
+msgid "Email"
+msgstr "Email"
+
+#: ziggurat_cms/validation/forms.py:59
+msgid "Login"
+msgstr "Login"
+
+#: ziggurat_cms/validation/forms.py:88
+msgid "Confirm password"
+msgstr "Confirm password"
+
+#: ziggurat_cms/validation/forms.py:110
+msgid "Name"
+msgstr "Name"
+
+#: ziggurat_cms/validation/forms.py:117
+msgid "Description"
+msgstr "Description"
+
+#: ziggurat_cms/validation/forms.py:132
+msgid "Permission"
+msgstr "Permission"

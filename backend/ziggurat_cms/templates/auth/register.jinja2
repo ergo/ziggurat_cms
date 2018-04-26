@@ -1,0 +1,34 @@
+{% extends "ziggurat_cms:templates/layout.jinja2" %}
+{% import 'ziggurat_cms:templates/partials/ziggurat_form.jinja2' as form %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+
+        <h3>Login</h3>
+
+        <form action="{{request.route_path('sign_in')}}"
+              method="POST">
+            {{form.render_form(login_form)}}
+            <button type="submit" class="btn btn-secondary">{% trans %}Log In{% endtrans %}</button>
+            <a href="{{request.route_path('lost_password')}}">{% trans %}Forgot password?{% endtrans %}</a>
+
+        </form>
+
+        <h3>{% trans %}Login via social account{% endtrans %}</h3>
+        <a href="{{request.route_path('social_auth', provider='facebook')}}" class="btn btn-secondary">Facebook</a>
+        <a href="{{request.route_path('social_auth', provider='google')}}" class="btn btn-secondary">Google</a>
+        <a href="{{request.route_path('social_auth', provider='twitter')}}" class="btn btn-secondary">Twitter</a>
+
+    </div>
+
+    <div class="col-md-6">
+        <h3>{% trans %}Register{% endtrans %}</h3>
+
+        <form action="{{request.route_path('register')}}" method="POST">
+            {{form.render_form(registration_form)}}
+            <button type="submit" class="btn btn-secondary">{% trans %}Register{% endtrans %}</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

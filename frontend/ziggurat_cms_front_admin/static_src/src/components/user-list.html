@@ -1,0 +1,80 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../behaviors/ziggurat-admin-basic.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../../bower_components/iron-a11y-keys/iron-a11y-keys.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/polymer-ui-router/uirouter-sref.html">
+
+<dom-module id="user-list">
+    <template>
+        <style include="shared-styles"></style>
+
+        <iron-ajax
+            id="ajax-users"
+            url="[[getAPIUrl(appConfig, '/users')]]"
+            auto
+            handle-as="json"
+            bubbles
+            on-iron-ajax-response="handleResponse"
+            on-iron-ajax-request="handleRequest"
+            on-iron-ajax-error="handleError"
+            last-response="{{users}}"
+            content-type="application/json"
+            debounce-duration="100"></iron-ajax>
+
+        <div class="table default" id="resource-list-table">
+            <div class="row header">
+                <div class="cell">[[localize('User Name')]]</div>
+                <div class="cell">[[localize('Email')]]</div>
+                <div class="cell">[[localize('Actions')]]</div>
+            </div>
+            <template is="dom-repeat" items="[[users]]" as="user">
+                <div class="row">
+                    <div class="cell">[[user.public_user_name]]</div>
+                    <div class="cell">[[user.public_email]]</div>
+                    <div class="cell actions">
+                        <uirouter-sref state="users.edit" param-user-id$="[[user.uuid]]">
+                            <paper-icon-button icon="editor:mode-edit" title="Edit User">
+                            </paper-icon-button>
+                        </uirouter-sref>
+                    </div>
+                    <div class="cell type">[[node.resource_type]]</div>
+                </div>
+            </template>
+        </div>
+    </template>
+
+    <script>
+
+        class ZigguratCMSAdminUserList extends ZigguratAdminBasicMixin(Polymer.GestureEventListeners(
+            Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element))) {
+            static get is() {
+                return "user-list";
+            }
+
+            static get properties() {
+                return {}
+            }
+
+            handleRequest(event) {
+                this.fire('overlay-ajax-started', {});
+            }
+
+            handleResponse() {
+                this.fire('overlay-ajax-stopped', {});
+            }
+
+            handleError(event) {
+                event.stopPropagation();
+                this.fire('overlay-ajax-stopped', {});
+            }
+        }
+
+        customElements.define(ZigguratCMSAdminUserList.is, ZigguratCMSAdminUserList);
+
+    </script>
+</dom-module>

@@ -1,0 +1,21 @@
+{% extends "layout.jinja2" %}
+{% import 'ziggurat_cms:templates/partials/breadcrumbs.jinja2' as breadcrumb_macros %}
+{% import 'ziggurat_cms:templates/partials/navigation-side-menu.jinja2' as side_menu_macros %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-3">
+
+            {{ side_menu_macros.render(request, resource, menu_entries) }}
+        </div>
+        <div class="col-md-9">
+
+            {{ breadcrumb_macros.render(request, breadcrumbs) }}
+
+        {% if elements %}
+            {{ elements[0].render(request, resource) |safe}}
+        {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+

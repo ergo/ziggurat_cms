@@ -1,0 +1,138 @@
+.bg-faded {
+    background-color: transparent;
+}
+
+a, a:link, a:visited, a:hover {
+    color: #436203;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #6b9118;
+}
+
+.navbar-brand{
+    color: #ffffff;
+    &:link, &:visited{
+        color: #ffffff !important;
+    }
+    &:hover{
+        color: #cdff6f !important;
+    }
+
+    .brand-subtext{
+        font-size: 75%;
+    }
+
+}
+
+#top-nav {
+    background-image: url('../images/podswierkiem2_top.jpg');
+    background-repeat: no-repeat;
+    background-position: top center;
+    min-height: 280px;
+    color: #ffffff;
+
+    .container {
+        align-self: flex-start;
+        padding-top: 30px;
+        z-index:2; // fixes issue with responsive menu being obscured
+
+        > *{
+            align-self: flex-start;
+        }
+    }
+
+    .navbar-brand .navbar-nav {
+        color: #ffffff;
+    }
+
+    .navbar-nav{
+        background-color: rgba(29, 116, 47, 0.6);
+        color: #ffffff;
+    }
+
+    .nav-item{
+        cursor: pointer;
+    }
+
+    .nav-link {
+        color: #ffffff;
+        &:link, &:visited {
+            color: #ffffff;
+        }
+        &:hover{
+            color: #cdff6f !important;
+        }
+    }
+
+
+
+}
+
+#middle-content {
+    margin-top: -130px;
+}
+
+#navigation-side-menu {
+
+    border: 0;
+    .card {
+        border: 0;
+    }
+
+    .card-header {
+        background-color: #6ea106;
+        border: 0;
+        border-radius: 0;
+        color: #ffffff;
+    }
+    .list-group-item {
+        border: 0;
+
+    }
+
+    a, a:link, a:visited, a:hover {
+        color: #436203;
+    }
+
+}
+
+.breadcrumb {
+    background-color: transparent;
+    padding: 0px;
+
+    a, a:link, a:visited, a:hover {
+        color: #436203;
+    }
+}
+
+.blog {
+
+    .title {
+        margin: 10px 0;
+        padding-bottom: 10px;
+        border-bottom: 5px solid #6ea106;
+    }
+
+    .date {
+        text-align: right;
+        color: #949494;
+    }
+
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "●"
+}
+
+.pagination {
+    .page-item.active {
+
+        .page-link {
+            border-color: #aec480;
+            background-color: #aec480;
+        }
+
+    }
+}

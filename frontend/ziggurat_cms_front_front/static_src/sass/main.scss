@@ -1,0 +1,34 @@
+@import 'bootstrap';
+
+@import '../node_modules/quill/dist/quill.bubble';
+
+#top-nav {
+    margin-bottom: 1em;
+}
+
+.ql-editor {
+    padding: 0;
+    height: auto;
+    overflow-y: inherit;
+    white-space: normal;
+}
+
+.ql-editor .ql-video{
+    margin: 10px auto;
+
+}
+
+.ql-editor img{
+    max-width:100%;
+}
+
+.zigguratcms-upload-files{
+    .description{
+        white-space: pre-wrap;
+    }
+}
+
+
+.pagination{
+    margin: 1rem 0;
+}

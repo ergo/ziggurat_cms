@@ -1,0 +1,14 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/zigguratcms-front.html",
+  "fragments": [],
+  "sourceGlobs": [
+   "src/**/*",
+   "images/**/*",
+   "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/**/*"
+  ]
+}

@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/lib/utils/flattened-nodes-observer.html">
+
+
+<dom-module id="bootstrap-nav-toggler">
+    <template>
+        <slot></slot>
+    </template>
+    <script>
+        class BootstrapNavToggler extends Polymer.GestureEventListeners(Polymer.Element) {
+            static get is() {
+                return "bootstrap-nav-toggler";
+            }
+
+            static get properties() {
+                return {
+                    toggled: {
+                        type: Boolean,
+                        value: false,
+                        reflectToAttribute: true
+                    },
+                    /**
+                     * Looks in document for element to apply "show" class
+                     */
+                    targetSelector: String,
+                    clsName: {
+                        type: String,
+                        value: 'show'
+                    }
+                }
+            }
+
+            toggleCls(event) {
+                this.toggled = !this.toggled;
+                this.dispatchEvent(new CustomEvent('bootstrap-nav-toggler-toggle', {detail: {toggled: this.toggled}}));
+                var node = window.document.querySelector(this.targetSelector);
+                node.classList.toggle(this.clsName, this.toggled);
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                Polymer.Gestures.addListener(this, 'tap', this.toggleCls.bind(this));
+            }
+
+            disconnectedCallback() {
+                super.connectedCallback();
+                Polymer.Gestures.removeListener(this, 'tap', this.toggleCls.bind(this));
+            }
+        }
+
+        customElements.define(BootstrapNavToggler.is, BootstrapNavToggler);
+
+    </script>
+</dom-module>

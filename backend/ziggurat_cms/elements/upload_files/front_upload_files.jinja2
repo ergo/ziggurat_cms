@@ -1,0 +1,28 @@
+<table class="table zigguratcms-upload-files">
+    <thead>
+    <tr>
+        <th>Info</th>
+        <th>Extension</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for file in element.files %}
+        <tr>
+            <td>
+                <p class="name"><strong>
+                    <a href="{{ request.route_path('element',
+                        object='zigguratcms-upload-files-elements-files',
+                        uuid=file.uuid) }}">{{ file.name }}</a></strong>
+                    <span class="filename">({{ file.original_filename }})</span>
+                </p>
+                <p class="description">{{ file.description }}</p>
+
+            </td>
+            <td><a href="{{ request.route_path('element',
+            object='zigguratcms-upload-files-elements-files',
+            uuid=file.uuid) }}">{{ file.extension }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

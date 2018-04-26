@@ -1,0 +1,27 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/zigguratcms-admin.html",
+  "fragments": [],
+  "sources": [
+   "src/**/*",
+   "images/**/*",
+   "bower.json"
+  ],
+  "extraDependencies": [
+    "manifest.json"
+  ],
+    "lint": {
+        "rules": ["polymer-2-hybrid"]
+    },
+    "builds": [
+        {
+            "preset": "es5-bundled"
+        },
+        {
+            "preset": "es6-bundled"
+        },
+        {
+            "preset": "es6-unbundled"
+        }
+    ]
+}

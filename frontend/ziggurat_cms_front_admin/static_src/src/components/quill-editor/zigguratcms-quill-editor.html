@@ -1,0 +1,166 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer-ui-router/uirouter-sref.html">
+<link rel="import" href="../../behaviors/ziggurat-admin-basic.html">
+<link rel="import" href="../../shared-styles.html">
+<link rel="import" href="../image-picker-dialog.html">
+<link rel="import" href="zigguratcms-quill-editor-base.html">
+
+
+<dom-module id="zigguratcms-quill-editor">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+
+            }
+
+        </style>
+
+        <image-picker-dialog
+            id="image-picker-dialog"
+            on-image-picker-selected="imageSelected"
+            api-object-type="zigguratcms-quill-editor-elements-images"
+            api-images-url="[[getAPIUrl(appConfig, '/zigguratcms-quill-editor-elements/', uuid, '/rel/images')]]">
+        </image-picker-dialog>
+
+        <zigguratcms-quill-editor-base
+            delta="{{config.delta}}"
+            compiled-html="{{config.compiledHtml}}"
+            on-zigguratcms-quill-editor-select-image="openImageDialog"
+            dirty="{{dirty}}"></zigguratcms-quill-editor-base>
+
+        <iron-ajax
+            id="ajax"
+            handle-as="json"
+            url="[[getAPIUrl(appConfig, '/zigguratcms-quill-editor-elements/', uuid)]]"
+            bubbles
+            method="PATCH"
+            content-type="application/json"
+            on-iron-ajax-response="handleResponse"
+            on-iron-ajax-request="handleRequest"
+            on-iron-ajax-error="handleError"
+            debounce-duration="100"></iron-ajax>
+
+    </template>
+    <script>
+
+        class ZigguratCMSQuillEditor extends ZigguratAdminBasicMixin(Polymer.GestureEventListeners(
+            Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element))) {
+            static get is() {
+                return "zigguratcms-quill-editor";
+            }
+
+            static get properties() {
+                return {
+                    status: Number,
+                    resourceUuid: String,
+                    uuid: String,
+                    config: {
+                        type: Object,
+                        value() {
+                            return {
+                                delta: {},
+                                compiledHtml: ''
+                            }
+                        },
+                        notify: true
+                    },
+                    isConfigured: {
+                        type: Boolean,
+                        value: false
+                    },
+                    dirty: {
+                        type: Boolean,
+                        value: false
+                    },
+                    images: {
+                        type: Array,
+                        value() {
+                            return []
+                        }
+                    }
+                }
+            }
+
+            static get observers() {
+                return [
+                    'emitChange(config.*)'
+                ]
+            }
+
+            emitChange() {
+                if (!this.isConfigured) {
+                    return
+                }
+                this.fire('element-data-changed', {
+                    config: this.config,
+                    uuid: this.uuid,
+                    dirty: this.dirty
+                });
+            }
+
+            ready() {
+                super.ready();
+                this.isConfigured = true;
+            }
+
+            attached() {
+                this.listen(window, 'cms-elements-save-dirty', 'handleSaveDirty');
+            }
+
+            detached() {
+                this.unlisten(window, 'cms-elements-save-dirty', 'handleSaveDirty');
+            }
+
+            handleSaveDirty() {
+                console.log('handleSaveDirty', Math.random(), this.uuid);
+                if (this.dirty) {
+                    this.save();
+                }
+            }
+
+            save() {
+                var xsrfToken = Cookies.get('XSRF-TOKEN');
+                this.$['ajax'].headers['X-XSRF-TOKEN'] = xsrfToken;
+                this.$['ajax'].body = {
+                    config: this.config
+                };
+                this.$['ajax'].generateRequest();
+            }
+
+            handleRequest() {
+                this.fire('overlay-ajax-started', {});
+            }
+
+            handleResponse() {
+                this.fire('overlay-ajax-stopped', {});
+                this.dirty = false;
+                this.emitChange();
+            }
+
+            handleError() {
+                this.fire('overlay-ajax-stopped', {});
+            }
+
+            openImageDialog(event) {
+                event.stopPropagation();
+                this.$['image-picker-dialog'].open();
+            }
+
+            imageSelected(event) {
+                var editorComponent = this.querySelector('zigguratcms-quill-editor-base');
+                var range = editorComponent.quill.getSelection();
+                var src = this.appConfig.baseUrl + '/uploads/' + event.detail.upload_path + '/' + event.detail.filename;
+                editorComponent.quill.insertEmbed(range.index, 'image', src, Quill.sources.USER);
+            }
+
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+        }
+
+        customElements.define(ZigguratCMSQuillEditor.is, ZigguratCMSQuillEditor);
+
+
+    </script>
+</dom-module>

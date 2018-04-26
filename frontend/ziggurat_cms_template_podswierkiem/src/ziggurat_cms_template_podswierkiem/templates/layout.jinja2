@@ -1,0 +1,67 @@
+{% import 'ziggurat_cms:templates/partials/common.jinja2' as common %}
+{% import 'ziggurat_cms:templates/partials/navigation-top-menu.jinja2' as top_menu_macros %}
+
+<!DOCTYPE html>
+<html lang="{{ request.locale_name }}" data-ng-app="demoApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pyramid web application">
+    <meta name="author" content="Pylons Project">
+    <link rel="shortcut icon" href="/static/pyramid-16x16.png">
+
+    <title>{{ pick_view_title(request, zigguratcms_view_title) }}</title>
+
+    {{ common.common_head(request) }}
+
+    <link href="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_template_podswierkiem/css/main.css') }}"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" id="top-nav">
+    <div class="container">
+        <a class="navbar-brand" href="{{ request.route_path('/') }}">
+            {% set brand_html = request.context.application.config.get('brand_html', '') %}
+            {% if brand_html %}
+                <div>{{ brand_html |safe}}</div>
+            {% else %}
+                {{ request.context.application.resource_name }}
+            {% endif %}
+        </a>
+
+        <bootstrap-nav-toggler class="navbar-toggler" target-selector="#top-navigation">
+            <span class="navbar-toggler-icon"></span>
+        </bootstrap-nav-toggler>
+
+        {{ top_menu_macros.render(request, top_nodes.values()) }}
+
+    </div>
+</nav>
+
+<div class="container" id="middle-content">
+
+    {% for flash in flash_messages %}
+        <div class="alert alert-{{ flash['level'] }}"
+             role="alert">{{ flash['msg'] }}</div>
+    {% endfor %}
+    {% block outer_content %}
+        <div class="row">
+            <div class="col-md-12">
+                {% block content %}
+                    <p>{% trans %}No content{% endtrans %}</p>
+                {% endblock content %}
+            </div>
+        </div>
+    {% endblock outer_content %}
+
+</div> <!-- /container -->
+
+<zigguratcms-front></zigguratcms-front>
+</body>
+</html>

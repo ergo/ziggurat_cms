@@ -1,0 +1,87 @@
+{% macro common_head(request) %}
+    <link
+        href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+        rel="stylesheet">
+
+    <link href="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/css/main.css') }}"
+          rel="stylesheet">
+
+    <script src="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/bower_components/webcomponentsjs/webcomponents-loader.js') }}"></script>
+    <script>
+
+
+        // Load pre-caching Service Worker
+        //      if ('serviceWorker' in navigator) {
+        //        window.addEventListener('load', function() {
+        //          navigator.serviceWorker.register('/service-worker.js');
+        //        });
+        //      }
+
+        window.APP_CONFIG = {
+            baseUrl: "{{ request.route_url('/')[:-1] }}",
+            apiUrl: "{{ request.route_url('api_objects',version='0.1', object='')[:-1] }}",
+            applicationUUID: null,
+            organizationUUID: null
+        }
+        {% if request.context.organization %}
+            window.APP_CONFIG.organizationUUID = '{{ request.context.organization.uuid }}';
+        {% endif %}
+        {% if request.context.application %}
+            window.APP_CONFIG.applicationUUID = '{{ request.context.application.uuid }}';
+        {% endif %}
+        window.USER_UUID = null;
+        {% if request.user %}
+            window.USER_UUID = '{{ request.user.uuid }}';
+        {% endif %}
+        window.TRANSLATION_LANGUAGE = 'pl';
+        window.TRANSLATIONS = {
+            'en': {},
+            'pl': {
+                'Previous': 'Poprzedni',
+                'Next': 'Następny',
+            }
+        };
+    </script>
+    <link rel="import"
+          href="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/src/zigguratcms-front.html') }}">
+{% endmacro %}
+
+{% macro render_paginator(paginator) %}
+{% set radius = 4 %}
+{% set link_map = paginator.link_map('~4~', curpage_attr={'class':"page-item active"}, link_attr={'class':"page-item"},  dotdot_attr={'class':"page-item disabled"}) %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if paginator.radius < paginator.page %}
+                <li class="page-item">
+                    <a href="{{ link_map['first_page']['href'] }}" aria-label="First" class="page-link">
+                        <span aria-hidden="true"><i class="fa fa-chevron-circle-left"></i></span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if paginator.page > 1 %}
+                <li class="page-item">
+                    <a href="{{ link_map['previous_page']['href'] }}" aria-label="Previous" class="page-link">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
+                    </a>
+                </li>
+            {% endif %}
+            {% for page in link_map['range_pages'] %}
+            <li class="{{ page['attrs'].get('class')}}"><a href="{{ page.href }}" class="page-link">{{ page.value }}</a></li>
+            {% endfor %}
+            {% if paginator.last_page and paginator.page < paginator.last_page %}
+                <li class="page-item">
+                    <a href="{{ link_map['next_page']['href'] }}" aria-label="Next" class="page-link">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right"></i></span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if paginator.page < paginator.page_count - paginator.radius %}
+                <li class="page-item">
+                    <a href="{{ link_map['last_page']['href'] }}" aria-label="last" class="page-link">
+                        <span aria-hidden="true"><i class="fa fa-chevron-circle-right"></i></span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{%- endmacro %}

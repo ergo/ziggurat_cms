@@ -1,0 +1,12 @@
+{% for row in element.config.rows %}
+    <div class="row">
+        {% for column in row.columns %}
+            <div class="col-md-{{ column.config.span }}">
+                {% for elem_uuid in column.element_uuids %}
+                    {{ element_dict[elem_uuid].render(request, resource) |safe}}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+

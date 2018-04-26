@@ -1,0 +1,9 @@
+{% import 'ziggurat_cms:templates/partials/common.jinja2' as common_widgets %}
+
+{% for entry in blog_entries_paginator.items %}
+{{ entry.render_abstract(request, resource) |safe }}
+{% endfor %}
+
+<div class="text-center">
+    {{common_widgets.render_paginator(blog_entries_paginator)}}
+</div>

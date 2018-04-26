@@ -1,0 +1,11 @@
+<ul>
+    {% for node in children %}
+
+        <li>
+            <a href="{{ request.route_path('object_slug',
+                        slug=node.current_slug) }}">
+                {{ node.resource_name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

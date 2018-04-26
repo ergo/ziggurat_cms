@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer-redux/polymer-redux.html">
+<script src="../node_modules/redux/dist/redux.min.js"></script>
+<script src="../node_modules/redux-thunk/dist/redux-thunk.min.js"></script>
+
+<script>
+    var ReduxThunk = window.ReduxThunk.default;
+
+    // Setup a Redux store
+    const initial = {
+        message: 'Redux is awesome.'
+    };
+    const reducer = function (state, action) {
+        switch (action.type) {
+            case 'UPDATE_MESSAGE':
+                return {message: action.message};
+            default:
+                return state;
+        }
+    };
+    const store = Redux.createStore(
+        reducer,
+        initial,
+
+        // The best part 8)
+        Redux.compose(
+            Redux.applyMiddleware(ReduxThunk),
+            window.devToolsExtension
+                ? window.devToolsExtension()
+                : v => v
+        )
+    );
+
+    // Create the Polymer mixin
+    ReduxMixin = PolymerRedux(store);
+</script>

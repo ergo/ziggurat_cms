@@ -1,0 +1,11 @@
+<div class="blog entry ql-editor">
+    <div class="title">
+        <h1><a href="{{ request.route_path('element_slug',
+                        slug=element.current_slug) }}">{{ element.name or '' }}</a></h1>
+    </div>
+    <p class="date">{{ element.date_created.strftime('%Y-%m-%d %H:%M') }}</p>
+
+    <div class="contents">
+        {{ element.config.get('compiledHtml', '')  |safe }}
+    </div>
+</div>

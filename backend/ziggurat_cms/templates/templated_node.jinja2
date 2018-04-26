@@ -1,0 +1,3 @@
+{% set package_name = request.context.application.config['template_package'] if request.context.application else None %}
+{% set tmpl = pick_template_package(request, package_name, 'ziggurat_cms:templates/node.jinja2') %}
+{% extends tmpl %}
