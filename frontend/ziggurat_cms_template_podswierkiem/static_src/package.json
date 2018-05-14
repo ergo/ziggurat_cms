@@ -6,37 +6,37 @@
         "type": "git",
         "url": "git@github.com:PolymerElements/generator-polymer-init-custom-build"
     },
-    "license": "http://polymer.github.io/LICENSE.txt",
-    "bugs": {
-        "url": "https://github.com/PolymerElements/generator-polymer-init-custom-build/issues"
-    },
-    "engines": {
-        "node": ">=4.0"
-    },
     "scripts": {
-        "build": "gulp",
-        "watch": "gulp watch",
+        "build": "webpack --progress --mode=production",
+        "dev": "webpack --watch --progress --mode=development",
         "bower": "bower install"
     },
+    "license": "http://polymer.github.io/LICENSE.txt",
+    "bugs": {
+        "url": "https://github.com/AppEnlight/channelstream/issues"
+    },
+    "engines": {
+        "node": ">=8.0"
+    },
     "private": true,
-    "devDependencies": {},
+    "devDependencies": {
+    },
     "dependencies": {
-        "babel-loader": "^6.2.8",
+        "copy-webpack-plugin": "^4.4.2",
+        "exports-loader": "^0.6.4",
+        "webpack": "^4.0.0",
+        "webpack-cli": "^2.0.9",
+        "webpack-dev-server": "^2.9.1",
+        "webpack-uglify-js-plugin": "^1.1.9",
         "bootstrap": "v4.0.0-alpha.6",
-        "commonjs": "0.0.1",
-        "del": "^2.2.1",
-        "gulp": "github:gulpjs/gulp#4.0",
-        "gulp-batch": "^1.0.5",
-        "gulp-crisper": "^1.1.0",
-        "gulp-if": "^2.0.1",
-        "gulp-imagemin": "^3.0.1",
-        "gulp-sass": "^3.0.0",
-        "gulp-vulcanize": "^6.1.0",
-        "gulp-watch": "^4.3.9",
-        "gulp-webpack": "^1.5.0",
-        "merge-stream": "^1.0.0",
+        "bower": "^1.8.2",
+        "css-loader": "^0.28.11",
+        "imports-loader": "^0.7.1",
+        "mini-css-extract-plugin": "^0.4.0",
         "node-sass": "^4.1.1",
-        "plylog": "^0.4.0",
-        "bower": "^1.8.0"
+        "npm-check-updates": "^2.14.0",
+        "sass-loader": "^7.0.1",
+        "style-loader": "^0.21.0",
+        "web-animations-js": "^2.3.1"
     }
 }
