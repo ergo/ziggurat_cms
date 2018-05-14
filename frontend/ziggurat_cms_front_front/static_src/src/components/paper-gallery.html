@@ -134,9 +134,12 @@
                 return metadata;
             }
 
-            attached() {
-                var children = this.getEffectiveChildren('entries');
-                this.items = children;
+            connectedCallback() {
+                super.connectedCallback();
+                Polymer.RenderStatus.beforeNextRender(this, function() {
+                    var children = this.getEffectiveChildren('entries');
+                    this.items = children;
+                });
             }
 
             computeSelected() {
