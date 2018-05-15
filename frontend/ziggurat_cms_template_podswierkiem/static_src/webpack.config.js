@@ -47,7 +47,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    "css-loader", // translates CSS into CommonJS
+                    { loader: 'css-loader', options: { url: false } }, // translates CSS into CommonJS
                     "sass-loader" // compiles Sass to CSS
                 ]
             }
@@ -58,13 +58,13 @@ module.exports = {
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: "css/[name].css"
-        })
+        }),
         // This plugin will copy files over to ‘./dist’ without transforming them.
         // That's important because the custom-elements-es5-adapter.js MUST
         // remain in ES2015. We’ll talk about this a bit later :)
-        // new CopyWebpackPlugin([{
-        //     from: path.resolve(__dirname, 'bower_components/webcomponentsjs/*.js'),
-        //     to: 'bower_components/webcomponentsjs/[name].[ext]'
-        // }])
+        new CopyWebpackPlugin([{
+            from: path.resolve(rootDir, 'src', 'images'),
+            to: 'images'
+        }])
     ]
 };
