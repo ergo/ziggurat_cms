@@ -3,21 +3,13 @@
         href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
         rel="stylesheet">
 
-    <link href="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/css/main.css') }}"
+    <link href="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/css/sass.css') }}"
           rel="stylesheet">
 
-    <script src="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/bower_components/webcomponentsjs/webcomponents-loader.js') }}"></script>
+    <script src="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/bower_components/webcomponentsjs/custom-elements-es5-adapter.js') }}"></script>
+    <script src="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/bower_components/webcomponentsjs/webcomponents-lite.js') }}"></script>
     <script>
-
-
-        // Load pre-caching Service Worker
-        //      if ('serviceWorker' in navigator) {
-        //        window.addEventListener('load', function() {
-        //          navigator.serviceWorker.register('/service-worker.js');
-        //        });
-        //      }
-
-        window.APP_CONFIG = {
+            window.APP_CONFIG = {
             baseUrl: "{{ request.route_url('/')[:-1] }}",
             apiUrl: "{{ request.route_url('api_objects',version='0.1', object='')[:-1] }}",
             applicationUUID: null,
@@ -42,8 +34,7 @@
             }
         };
     </script>
-    <link rel="import"
-          href="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/src/zigguratcms-front.html') }}">
+    <script src="{{ request.static_url('ziggurat_cms:static/ziggurat_cms_front_front/bundle-main.js') }}"></script>
 {% endmacro %}
 
 {% macro render_paginator(paginator) %}

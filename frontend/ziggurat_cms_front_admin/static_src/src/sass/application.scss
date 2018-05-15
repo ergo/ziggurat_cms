@@ -1,15 +1,15 @@
 // Core variables and mixins
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
 // Reset and dependencies
-@import "../node_modules/bootstrap/scss/root";
-@import "../node_modules/bootstrap/scss/print";
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/grid";
-@import '../node_modules/quill/dist/quill.core';
-@import '../node_modules/quill/dist/quill.snow';
-@import '../node_modules/quill/dist/quill.bubble';
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/print";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/grid";
+@import '../../node_modules/quill/dist/quill.core.css';
+@import '../../node_modules/quill/dist/quill.snow.css';
+@import '../../node_modules/quill/dist/quill.bubble.css';
 
 * {
     box-sizing: border-box;

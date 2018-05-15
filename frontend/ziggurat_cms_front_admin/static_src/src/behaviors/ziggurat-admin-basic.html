@@ -1,48 +1,5 @@
 <script>
-    /**
-     * Admin behavior
-     *
-     * @polymerBehavior
-     */
-    ZigguratAdminBasicBehavior = {
-
-        properties: {
-            appConfig: {
-                type: Object,
-                value: function () {
-                    return window.APP_CONFIG
-                }
-            },
-            useKeyIfMissing: {
-                value: true,
-                type: Boolean
-            },
-            language: {
-                value: function () {
-                    return window.TRANSLATION_LANGUAGE || 'en'
-                },
-                type: String
-            },
-            resources: {
-                type: Object,
-                value: function () {
-                    return window.TRANSLATIONS || {en: {}}
-                }
-            }
-        },
-        getAPIUrl: function () {
-            var args = Array.prototype.slice.call(arguments);
-            if (args.indexOf(undefined) !== -1) {
-                return undefined
-            }
-            return this.appConfig.apiUrl + args.slice(1).join('');
-        },
-        getCSRFToken: function () {
-            return Cookies.get('XSRF-TOKEN');
-        }
-    };
-
-    ZigguratAdminBasicMixin = (superClass) => class extends superClass {
+    let ZigguratAdminBasicMixin = (superClass) => class extends superClass {
 
         static get properties() {
             return {
@@ -91,5 +48,7 @@
             this.dispatchEvent(new CustomEvent('overlay-ajax-stopped', {bubbles: true, composed: true}));
         }
     }
+
+    window.ZigguratAdminBasicMixin = ZigguratAdminBasicMixin;
 
 </script>

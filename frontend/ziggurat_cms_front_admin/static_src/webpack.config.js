@@ -1,11 +1,14 @@
 /* webpack.config.js */
-
+require('style-loader');
+require('css-loader');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var path = require('path');
 
-let destinationDirectory = path.join(process.cwd(), '..', '..','..' , '..' ,'static')
-let rootDir =  process.cwd(path.join('src', 'ziggurat_cms_front_admin'))
+const projectName = 'ziggurat_cms_front_admin';
+let destinationDirectory = path.join(process.cwd(), '..', '..', '..', 'static')
+let rootDir = process.cwd(path.join('src', projectName));
 
 if (process.env.ZIGGURAT_CMS_STATIC_DIR) {
     destinationDirectory = process.env.ZIGGURAT_CMS_STATIC_DIR
@@ -21,11 +24,13 @@ if (process.env.ZIGGURAT_CMS_BUILD_ROOT_DIR) {
 
 module.exports = {
     // Tell Webpack which file kicks off our app.
-    entry: path.resolve(__dirname, 'src/index.js'),
-    // Tell Weback to output our bundle to ./dist/bundle.js
+    entry: {
+        main: path.resolve(__dirname, 'src/index.js'),
+        sass: path.resolve(__dirname, 'src/sass.js')
+    },
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(destinationDirectory, 'ziggurat_cms_front_admin')
+        filename: 'bundle-[name].js',
+        path: path.resolve(destinationDirectory, projectName)
     },
     // Tell Webpack which directories to look in to resolve import statements.
     // Normally Webpack will look in node_modules by default but since we’re overriding
@@ -42,14 +47,14 @@ module.exports = {
     // CSS, and (thanks to our loader) HTML.
     module: {
         rules: [
-            // {
-            //     test: require.resolve("./bower_components/polymer-ui-router/vendor/ui-router-core.js"),
-            //     use: 'imports-loader?define=>false'
-            // },
-            // {
-            //     test: require.resolve("./bower_components/polymer-ui-router/uirouter-behavior.html"),
-            //     use: 'imports-loader?this=>window'
-            // },
+            {
+                test: require.resolve("./bower_components/polymer-ui-router/vendor/ui-router-core.js"),
+                use: 'imports-loader?this=>window'
+            },
+            {
+                test: require.resolve("./bower_components/polymer-ui-router/uirouter-mixin.html"),
+                use: 'imports-loader?this=>window'
+            },
             {
                 // If you see a file that ends in .html, send it to these loaders.
                 test: /\.html$/,
@@ -58,37 +63,61 @@ module.exports = {
                 // polymer-webpack-loader, and hand the output to
                 // babel-loader. This let's us transpile JS in our `<script>` elements.
                 use: [
-                    { loader: 'babel-loader' },
-                    { loader: 'polymer-webpack-loader' }
+                    {loader: 'babel-loader'},
+                    {loader: 'polymer-webpack-loader'}
                 ]
             },
             {
                 // If you see a file that ends in .js, just send it to the babel-loader.
                 test: /\.js$/,
                 use: 'babel-loader'
+                // Optionally exclude node_modules from transpilation except for polymer-webpack-loader:
+                // exclude: /node_modules\/(?!polymer-webpack-loader\/).*/
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader", // translates CSS into CommonJS
+                    "sass-loader" // compiles Sass to CSS
+                ]
+            },
+            // this is required because of bug:
+            // https://github.com/webpack-contrib/polymer-webpack-loader/issues/49
+            {
+                test: /intl-messageformat.min.js/,
+                use: 'imports-loader?this=>window'
+            },
+            {
+                test: /quill.js/,
+                use: 'imports-loader?this=>window'
             }
         ]
     },
-    // Enable the Webpack dev server which will build, serve, and reload our
-    // project on changes.
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
-        port: 9000
-    },
     plugins: [
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: "css/[name].css"
+        }),
         // This plugin will generate an index.html file for us that can be used
         // by the Webpack dev server. We can give it a template file (written in EJS)
         // and it will handle injecting our bundle for us.
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/index.ejs')
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: path.resolve(__dirname, 'src/index.ejs')
+        // }),
         // This plugin will copy files over to ‘./dist’ without transforming them.
         // That's important because the custom-elements-es5-adapter.js MUST
         // remain in ES2015. We’ll talk about this a bit later :)
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, 'bower_components/webcomponentsjs/*.js'),
             to: 'bower_components/webcomponentsjs/[name].[ext]'
-        }])
+        },
+            {
+                from: path.resolve(__dirname, 'node_modules/web-animations-js'),
+                to: 'web-animations-js'
+            },
+
+        ])
     ]
 };

@@ -42,6 +42,7 @@
         "npm-check-updates": "^2.14.0",
         "polymer-build": "^2.1.1",
         "polymer-cli": "^1.5.7",
+        "polymer-ui-router": "^3.0.1",
         "polymer-webpack-loader": "^2.0.1",
         "quill": "1.2.0",
         "sass-loader": "^7.0.1",

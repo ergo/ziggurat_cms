@@ -1,6 +1,5 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../shared-styles.html">
-<link rel="import" href="quill-import.html">
 
 <dom-module id="zigguratcms-quill-editor-base">
     <template>
@@ -61,6 +60,7 @@
 
     </template>
     <script>
+        window.Quill = require('../../../node_modules/quill/dist/quill.js');
 
         class ZigguratCMSQuillEditorBase extends ZigguratAdminBasicMixin(Polymer.GestureEventListeners(
             Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior],Polymer.Element))) {
