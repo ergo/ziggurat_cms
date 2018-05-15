@@ -241,3 +241,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/development.ini
+/production.ini
