@@ -3,7 +3,9 @@
 !backend
 backend/*.egg-info
 !frontend
+**/bower_components
 **/node_modules
+node_modules
 !docker-entrypoint.sh
 !docker-entrypoint-static.sh
 !AUTHORS

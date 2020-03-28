@@ -13,15 +13,6 @@ USER application
 COPY --chown=application frontend /opt/frontend
 WORKDIR /opt/frontend
 ENV FRONTEND_ASSSET_ROOT_DIR /opt/frontend/static_build
-RUN cd /opt/frontend/ziggurat_cms_front_admin/static_src; yarn
-RUN cd /opt/frontend/ziggurat_cms_front_admin/static_src; yarn bower
-RUN cd /opt/frontend/ziggurat_cms_front_admin/static_src; yarn build
-RUN cd /opt/frontend/ziggurat_cms_front_front/static_src; yarn
-RUN cd /opt/frontend/ziggurat_cms_front_front/static_src; yarn bower
-RUN cd /opt/frontend/ziggurat_cms_front_front/static_src; yarn build
-RUN cd /opt/frontend/ziggurat_cms_template_podswierkiem/static_src; yarn
-RUN cd /opt/frontend/ziggurat_cms_template_podswierkiem/static_src; yarn bower
-RUN cd /opt/frontend/ziggurat_cms_template_podswierkiem/static_src; yarn build
 COPY docker-entrypoint-static.sh /opt/docker-entrypoint-static.sh
 USER root
 ENTRYPOINT ["/opt/docker-entrypoint-static.sh"]

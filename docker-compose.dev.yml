@@ -12,12 +12,14 @@ services:
       REDIS_SESSIONS_URL: redis://ziggurat_cms_redis_1:6379/0
       CELERY_BROKER_URL: redis://ziggurat_cms_redis_1:6379/1
       APP_ENV: development
+#      USER_UID: 1000
+#      USER_GID: 1000
     volumes:
       - type: bind
-        source: backend
+        source: ./backend
         target: /opt/application
         read_only: true
-      - type: bind
+      - type: volume
         source: rundir
         target: /opt/rundir
     networks:
@@ -25,33 +27,51 @@ services:
     depends_on:
       - db
       - redis
-  db:
-    image: postgres:12.2
-    #    ports:
-    #      - "5432:5432"
+  statics_admin:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.static
     environment:
-      POSTGRES_PASSWORD: test
-      POSTGRES_USER: postgres
+      FRONTEND_ASSSET_ROOT_DIR: "/opt/rundir/static"
+      STATIC_DIR: /opt/frontend/ziggurat_cms_front_admin/static_src
     volumes:
       - type: bind
-        source: ./docker/docker-entrypoint-initdb.d
-        target: /docker-entrypoint-initdb.d
-        read_only: true
-    networks:
-      - podswierkiem
-  redis:
-    image: redis:5.0.8
-    #    ports:
-    #      - "6379"
-    networks:
-      - podswierkiem
+        source: ./frontend
+        target: /opt/frontend
+      - type: volume
+        source: rundir
+        target: /opt/rundir
+  statics_front:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.static
+    environment:
+      FRONTEND_ASSSET_ROOT_DIR: "/opt/rundir/static"
+      STATIC_DIR: /opt/frontend/ziggurat_cms_front_front/static_src
     volumes:
       - type: bind
-        source: ./docker/redis/redis.conf
-        target: /usr/local/etc/redis/redis.conf
-        read_only: true
-volumes:
-  logvolume01: {}
-  rundir: {}
-networks:
-  podswierkiem:
+        source: ./frontend
+        target: /opt/frontend
+      - type: volume
+        source: rundir
+        target: /opt/rundir
+  statics_template:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.static
+    environment:
+      FRONTEND_ASSSET_ROOT_DIR: "/opt/rundir/static"
+      STATIC_DIR: /opt/frontend/ziggurat_cms_template_podswierkiem/static_src
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /opt/frontend
+      - type: volume
+        source: rundir
+        target: /opt/rundir

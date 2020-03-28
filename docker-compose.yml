@@ -17,11 +17,7 @@ services:
         source: ./backend
         target: /opt/application
         read_only: true
-      - type: bind
-        source: ./frontend
-        target: /opt/application_frontend
-        read_only: true
-      - type: bind
+      - type: volume
         source: rundir
         target: /opt/rundir
     networks:
@@ -62,6 +58,7 @@ volumes:
   logvolume01: {}
   rundir: {}
   backend: {}
+  frontend: {}
   pg_data: {}
 networks:
   podswierkiem:

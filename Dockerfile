@@ -59,6 +59,7 @@ ENV APP_ENV production
 # Copy the current directory contents into the container at /opt/application
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 COPY --chown=application backend /opt/application
+# required to install additional modules
 COPY --chown=application frontend /opt/application_frontend
 # install the app
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e .

@@ -6,8 +6,8 @@ fi
 if [ -n "${USER_GID}" ]; then
   groupmod -g $USER_GID application
 fi
+cd $STATIC_DIR
 
-if [ ! -d node_modules ]; then
-     gosu application yarn
-fi
+gosu application yarn
+gosu application yarn bower
 gosu application "$@"
