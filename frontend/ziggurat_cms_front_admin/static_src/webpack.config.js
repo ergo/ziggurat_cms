@@ -81,8 +81,8 @@ module.exports = {
         // remain in ES2015. We’ll talk about this a bit later :)
         new CopyWebpackPlugin([
             {
-                from: path.resolve(__dirname, 'node_modules/@webcomponents/webcomponentsjs/*.js'),
-                to: 'node_modules/@webcomponents/webcomponentsjs/[name].[ext]'
+                from: path.resolve(__dirname, 'node_modules/@webcomponents/webcomponentsjs'),
+                to: 'node_modules/@webcomponents/webcomponentsjs'
             },
             {
                 from: path.resolve(__dirname, 'node_modules/web-animations-js'),
