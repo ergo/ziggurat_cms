@@ -1,10 +1,12 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/preset-env", {
       "targets": {
-        "browsers": ["last 2 versions"]
-      }
+        "esmodules": true
+      },
+      "modules": false,
+      "debug": true
     }]
   ],
-    "plugins": ["transform-object-rest-spread"]
+  "plugins": ["@babel/plugin-proposal-object-rest-spread", "transform-regenerator"]
 }

@@ -1,7 +1,6 @@
 /* webpack.config.js */
 require('style-loader');
 require('css-loader');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var path = require('path');
@@ -37,18 +36,6 @@ module.exports = {
     // CSS, and (thanks to our loader) HTML.
     module: {
         rules: [
-            {
-                // If you see a file that ends in .html, send it to these loaders.
-                test: /\.html$/,
-                // This is an example of chained loaders in Webpack.
-                // Chained loaders run last to first. So it will run
-                // polymer-webpack-loader, and hand the output to
-                // babel-loader. This let's us transpile JS in our `<script>` elements.
-                use: [
-                    { loader: 'babel-loader' },
-                    { loader: 'polymer-webpack-loader' }
-                ]
-            },
             {
                 // If you see a file that ends in .js, just send it to the babel-loader.
                 test: /\.js$/,
@@ -87,6 +74,11 @@ module.exports = {
         // This plugin will copy files over to ‘./dist’ without transforming them.
         // That's important because the custom-elements-es5-adapter.js MUST
         // remain in ES2015. We’ll talk about this a bit later :)
-        new CopyWebpackPlugin([])
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, 'node_modules/@webcomponents/webcomponentsjs/*.js'),
+                to: 'node_modules/@webcomponents/webcomponentsjs/[name].[ext]'
+            }
+        ])
     ]
 };
