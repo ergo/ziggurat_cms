@@ -8,18 +8,9 @@ var path = require('path');
 
 const projectName = 'ziggurat_cms_front_front';
 let destinationDirectory = path.join(process.cwd(), '..', '..','..' ,'static')
-let rootDir =  process.cwd(path.join('src', projectName));
 
-if (process.env.ZIGGURAT_CMS_STATIC_DIR) {
-    destinationDirectory = process.env.ZIGGURAT_CMS_STATIC_DIR
-}
-
-if (process.env.ZIGGURAT_CMS_ROOT_DIR) {
-    rootDir = process.env.ZIGGURAT_CMS_ROOT_DIR
-}
-
-if (process.env.ZIGGURAT_CMS_BUILD_ROOT_DIR) {
-    rootDirectory = process.env.ZIGGURAT_CMS_BUILD_ROOT_DIR
+if (process.env.FRONTEND_ASSSET_ROOT_DIR) {
+    destinationDirectory = process.env.FRONTEND_ASSSET_ROOT_DIR
 }
 
 module.exports = {

@@ -1,0 +1,57 @@
+version: '3.2'
+services:
+  web:
+    stdin_open: true
+    tty: true
+    build: .
+    ports:
+      - "6543:6543"
+    environment:
+      SQLALCHEMY_URL: postgresql://test:test@ziggurat_cms_db_1:5432/ziggurat_cms
+      REDIS_DOGPILE_URL: redis://ziggurat_cms_redis_1:6379/0
+      REDIS_SESSIONS_URL: redis://ziggurat_cms_redis_1:6379/0
+      CELERY_BROKER_URL: redis://ziggurat_cms_redis_1:6379/1
+      APP_ENV: development
+    volumes:
+      - type: bind
+        source: backend
+        target: /opt/application
+        read_only: true
+      - type: bind
+        source: rundir
+        target: /opt/rundir
+    networks:
+      - podswierkiem
+    depends_on:
+      - db
+      - redis
+  db:
+    image: postgres:12.2
+    #    ports:
+    #      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: postgres
+    volumes:
+      - type: bind
+        source: ./docker/docker-entrypoint-initdb.d
+        target: /docker-entrypoint-initdb.d
+        read_only: true
+    networks:
+      - podswierkiem
+  redis:
+    image: redis:5.0.8
+    #    ports:
+    #      - "6379"
+    networks:
+      - podswierkiem
+    volumes:
+      - type: bind
+        source: ./docker/redis/redis.conf
+        target: /usr/local/etc/redis/redis.conf
+        read_only: true
+volumes:
+  logvolume01: {}
+  rundir: {}
+networks:
+  podswierkiem:

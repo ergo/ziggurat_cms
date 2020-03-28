@@ -1,9 +1,9 @@
 repoze.sendmail==4.1
-sqlalchemy>=1.0.12
+sqlalchemy>=1.1.18,<1.2.0
 ziggurat_foundations==0.7.1
 celery>=3.1.23
 redis>=2.10.3
-psycopg2>=2.6
+psycopg2-binary>=2.6
 paginate>=0.5.6
 paginate_sqlalchemy>=0.2.0
 jinja2>=2.9
@@ -29,5 +29,6 @@ webhelpers2>=2.0
 webhelpers2_grid>=0.1
 appenlight_client
 requests>=2.10.0
-pillow==3.4.2
+pillow==6.2.2
 bleach==1.5.0
+bcrypt==3.1.7
