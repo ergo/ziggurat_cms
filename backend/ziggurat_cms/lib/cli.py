@@ -19,7 +19,5 @@ def build_assets(registry, asset_config, *cmd_args, **cmd_kwargs):
                         'node_modules', 'bower_components', '__pycache__'))
     os.environ['ZIGGURAT_CMS_STATIC_DIR'] = settings['static.dir']
     subprocess.check_output(['yarn'], env=os.environ, cwd=dest)
-    subprocess.check_output(['node_modules/.bin/bower', 'install'],
-                            env=os.environ, cwd=dest)
     subprocess.check_output(['node_modules/.bin/webpack'], env=os.environ,
                             cwd=dest)
