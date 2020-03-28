@@ -29,8 +29,7 @@ module.exports = {
     // bower_components folder.
     resolve: {
         modules: [
-            path.resolve(__dirname, 'node_modules'),
-            path.resolve(__dirname, 'bower_components')
+            path.resolve(__dirname, 'node_modules')
         ]
     },
     // These rules tell Webpack how to process different module types.
@@ -38,14 +37,6 @@ module.exports = {
     // CSS, and (thanks to our loader) HTML.
     module: {
         rules: [
-            {
-                test: require.resolve("./bower_components/polymer-ui-router/vendor/ui-router-core.js"),
-                use: 'imports-loader?this=>window'
-            },
-            {
-                test: require.resolve("./bower_components/polymer-ui-router/uirouter-mixin.html"),
-                use: 'imports-loader?this=>window'
-            },
             {
                 // If you see a file that ends in .html, send it to these loaders.
                 test: /\.html$/,
@@ -100,15 +91,11 @@ module.exports = {
         // This plugin will copy files over to ‘./dist’ without transforming them.
         // That's important because the custom-elements-es5-adapter.js MUST
         // remain in ES2015. We’ll talk about this a bit later :)
-        new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'bower_components/webcomponentsjs/*.js'),
-            to: 'bower_components/webcomponentsjs/[name].[ext]'
-        },
+        new CopyWebpackPlugin([
             {
                 from: path.resolve(__dirname, 'node_modules/web-animations-js'),
                 to: 'web-animations-js'
-            },
-
+            }
         ])
     ]
 };
