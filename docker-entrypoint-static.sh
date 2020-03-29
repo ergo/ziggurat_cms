@@ -9,5 +9,4 @@ fi
 cd $STATIC_DIR
 
 gosu application yarn
-gosu application yarn bower
 gosu application "$@"

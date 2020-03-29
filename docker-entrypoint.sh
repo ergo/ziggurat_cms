@@ -13,6 +13,28 @@ if [ ! -f /opt/rundir/config.ini ]; then
   gosu application cp /opt/application/development.ini /opt/rundir/config.ini
 fi
 
+process_init_files() {
+	local f
+	for f; do
+		case "$f" in
+			*.sh)
+				# https://github.com/docker-library/postgres/issues/450#issuecomment-393167936
+				# https://github.com/docker-library/postgres/pull/452
+				if [ -x "$f" ]; then
+					echo "$0: running $f"
+					"$f"
+				else
+					echo "$0: sourcing $f"
+					. "$f"
+				fi
+				;;
+			*)        echo "$0: ignoring $f" ;;
+		esac
+	done
+}
+
+process_init_files /opt/entrypoint.d/*
+
 if ! [ -z "$SQLALCHEMY_URL" ]
 then
     # Backslash-escape the forward slashes in your replacement string, using pattern substitution parameter expansion.

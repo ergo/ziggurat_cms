@@ -14,13 +14,10 @@ COPY --chown=application frontend /opt/frontend
 WORKDIR /opt/frontend
 ENV FRONTEND_ASSSET_ROOT_DIR /opt/frontend/static_build
 RUN cd /opt/frontend/ziggurat_cms_front_admin/static_src; yarn
-RUN cd /opt/frontend/ziggurat_cms_front_admin/static_src; yarn bower
 RUN cd /opt/frontend/ziggurat_cms_front_admin/static_src; yarn build
 RUN cd /opt/frontend/ziggurat_cms_front_front/static_src; yarn
-RUN cd /opt/frontend/ziggurat_cms_front_front/static_src; yarn bower
 RUN cd /opt/frontend/ziggurat_cms_front_front/static_src; yarn build
 RUN cd /opt/frontend/ziggurat_cms_template_podswierkiem/static_src; yarn
-RUN cd /opt/frontend/ziggurat_cms_template_podswierkiem/static_src; yarn bower
 RUN cd /opt/frontend/ziggurat_cms_template_podswierkiem/static_src; yarn build
 # throw away the js container
 # Use an official Python runtime as a parent image
@@ -57,7 +54,6 @@ RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.py
 ENV PATH $PATH:/opt/venv/bin
 ENV APP_ENV production
 # Copy the current directory contents into the container at /opt/application
-COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 COPY --chown=application backend /opt/application
 # required to install additional modules
 COPY --chown=application frontend /opt/application_frontend
@@ -66,13 +62,18 @@ RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.py
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_front_admin
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_front_front
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_template_podswierkiem
-
 # copy pre-built js
 COPY --from=static --chown=application /opt/frontend/static_build /opt/rundir/static
 # Make port 6543 available to the world outside this container
 EXPOSE 6543
-VOLUME /opt/rundir
 USER root
+# discard the data from volumes so we don't accidently mount old non-git data
+RUN rm -rf /opt/application_frontend
+RUN rm -rf /opt/application
+VOLUME /opt/application
+VOLUME /opt/application_frontend
+VOLUME /opt/rundir
+COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 WORKDIR /opt/rundir
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 # Run application when the container launches
