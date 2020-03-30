@@ -30,5 +30,5 @@ webhelpers2_grid>=0.1
 appenlight_client
 requests>=2.10.0
 pillow==6.2.2
-bleach==1.5.0
+bleach==3.1.4
 bcrypt==3.1.7
