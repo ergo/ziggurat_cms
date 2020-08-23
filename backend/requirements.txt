@@ -17,7 +17,7 @@ pyramid_authstack>=1.0.1
 transaction>=1.6.1
 zope.sqlalchemy>=0.7.7
 waitress>=1.0a1
-dogpile.cache>=0.6.1
+dogpile.cache==0.9.0
 marshmallow>=2.8.0,<3.0
 wtforms>=2.1
 alembic>=0.8.6
