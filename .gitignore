@@ -244,3 +244,4 @@ dkms.conf
 /development.ini
 /production.ini
 !/docker/docker-entrypoint-initdb.d/
+/rundir/

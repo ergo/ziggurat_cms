@@ -19,8 +19,8 @@ services:
         source: ./backend
         target: /opt/application
         read_only: true
-      - type: volume
-        source: rundir
+      - type: bind
+        source: ./rundir
         target: /opt/rundir
     networks:
       - podswierkiem
@@ -40,8 +40,8 @@ services:
       - type: bind
         source: ./frontend
         target: /opt/frontend
-      - type: volume
-        source: rundir
+      - type: bind
+        source: ./rundir
         target: /opt/rundir
   statics_front:
     stdin_open: true
@@ -56,8 +56,8 @@ services:
       - type: bind
         source: ./frontend
         target: /opt/frontend
-      - type: volume
-        source: rundir
+      - type: bind
+        source: ./rundir
         target: /opt/rundir
   statics_template:
     stdin_open: true
@@ -72,6 +72,6 @@ services:
       - type: bind
         source: ./frontend
         target: /opt/frontend
-      - type: volume
-        source: rundir
+      - type: bind
+        source: ./rundir
         target: /opt/rundir

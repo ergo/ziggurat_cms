@@ -1,5 +1,5 @@
 # docker start
-
+    mkdir rundir
     docker-compose up
 
 # docker dev start
