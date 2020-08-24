@@ -10,7 +10,9 @@ if [ -n "${USER_GID}" ]; then
 fi
 
 if [ ! -f /opt/rundir/config.ini ]; then
+  set +e
   gosu application cp /opt/application/development.ini /opt/rundir/config.ini
+  set -e
 fi
 
 process_init_files() {
