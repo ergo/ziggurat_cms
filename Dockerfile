@@ -57,7 +57,7 @@ ENV APP_ENV production
 COPY --chown=application backend /opt/application
 # required to install additional modules
 COPY --chown=application frontend /opt/application_frontend
-# install the app
+# install the app, admin app and templates
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e .
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_front_admin
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_front_front
@@ -67,9 +67,6 @@ COPY --from=static --chown=application /opt/frontend/static_build /opt/rundir/st
 # Make port 6543 available to the world outside this container
 EXPOSE 6543
 USER root
-# discard the data from volumes so we don't accidently mount old non-git data
-RUN rm -rf /opt/application_frontend
-RUN rm -rf /opt/application
 VOLUME /opt/application
 VOLUME /opt/application_frontend
 VOLUME /opt/rundir
