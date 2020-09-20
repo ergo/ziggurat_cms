@@ -11,7 +11,7 @@ fi
 
 if [ ! -f /opt/rundir/config.ini ]; then
   set +e
-  gosu application cp /opt/application/development.ini /opt/rundir/config.ini
+  gosu application cp /opt/application/$APP_INI_FILE /opt/rundir/config.ini
   set -e
 fi
 

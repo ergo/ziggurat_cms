@@ -9,10 +9,6 @@ services:
     environment:
       APP_ENV: production
     volumes:
-      - type: bind
-        source: ./backend
-        target: /opt/application
-        read_only: true
       - type: volume
         source: rundir
         target: /opt/rundir

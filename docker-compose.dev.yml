@@ -9,6 +9,7 @@ services:
     command: "pserve --reload /opt/rundir/config.ini"
     environment:
       APP_ENV: development
+      APP_INI_FILE: development.ini
 #      USER_UID: 1000
 #      USER_GID: 1000
     volumes:

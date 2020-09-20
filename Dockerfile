@@ -53,6 +53,7 @@ RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.py
 # make application scripts visible
 ENV PATH $PATH:/opt/venv/bin
 ENV APP_ENV production
+ENV APP_INI_FILE production.ini
 # Copy the current directory contents into the container at /opt/application
 COPY --chown=application backend /opt/application
 # required to install additional modules
