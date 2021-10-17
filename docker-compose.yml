@@ -7,10 +7,15 @@ services:
     ports:
       - "8081:6543"
     environment:
-      APP_ENV: production
+      APP_ENV: development
+      APP_INI_FILE: development.ini
     volumes:
-      - type: volume
-        source: rundir
+      - type: bind
+        source: ./backend
+        target: /opt/application
+        read_only: true
+      - type: bind
+        source: ./rundir
         target: /opt/rundir
     depends_on:
       - db
@@ -40,6 +45,55 @@ services:
         source: ./docker/redis/redis.conf
         target: /usr/local/etc/redis/redis.conf
         read_only: true
+# statics are provided to speed up local development
+  statics_admin:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.static
+    environment:
+      FRONTEND_ASSSET_ROOT_DIR: "/opt/rundir/static"
+      STATIC_DIR: /opt/frontend/ziggurat_cms_front_admin/static_src
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /opt/frontend
+      - type: bind
+        source: ./rundir
+        target: /opt/rundir
+  statics_front:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.static
+    environment:
+      FRONTEND_ASSSET_ROOT_DIR: "/opt/rundir/static"
+      STATIC_DIR: /opt/frontend/ziggurat_cms_front_front/static_src
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /opt/frontend
+      - type: bind
+        source: ./rundir
+        target: /opt/rundir
+  statics_template:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.static
+    environment:
+      FRONTEND_ASSSET_ROOT_DIR: "/opt/rundir/static"
+      STATIC_DIR: /opt/frontend/ziggurat_cms_template_podswierkiem/static_src
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /opt/frontend
+      - type: bind
+        source: ./rundir
+        target: /opt/rundir
 volumes:
   logvolume01: {}
   rundir: {}

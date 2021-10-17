@@ -10,6 +10,6 @@ def includeme(config):
         'type': 'ziggurat_cms_template_podswierkiem',
         'build_script': build_assets, 'web_components': None,
         'asset_path': os.path.abspath(pkg_resources.resource_filename(
-            'ziggurat_cms_template_podswierkiem', '../../static_src'))
+            'ziggurat_cms_template_podswierkiem', '../static_src'))
     }
     config.cms_register_frontend_asset(frontend_config['type'], frontend_config)

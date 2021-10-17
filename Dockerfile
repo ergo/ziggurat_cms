@@ -61,11 +61,11 @@ COPY --chown=application frontend /opt/application_frontend
 # install the app, admin app and templates
 # https://thekev.in/blog/2016-11-18-python-in-docker/index.html
 # https://jbhannah.net/articles/python-docker-disappearing-egg-info
-ENV PYTHONPATH=/opt/application:/opt/application_frontend
-RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e .
-RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_front_admin
-RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_front_front
-RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_template_podswierkiem
+ENV PYTHONPATH=/opt/application:/opt/application_frontend/ziggurat_cms_front_admin:/opt/application_frontend/ziggurat_cms_front_front:/opt/application_frontend/ziggurat_cms_template_podswierkiem
+RUN cd /opt/venv/; /opt/venv/bin/python /opt/application/setup.py develop
+RUN cd /opt/venv/; /opt/venv/bin/python /opt/application_frontend/ziggurat_cms_front_admin/setup.py develop
+RUN cd /opt/venv/; /opt/venv/bin/python /opt/application_frontend/ziggurat_cms_front_front/setup.py develop
+RUN cd /opt/venv/; /opt/venv/bin/python /opt/application_frontend/ziggurat_cms_template_podswierkiem/setup.py develop
 # copy pre-built js
 COPY --from=static --chown=application /opt/frontend/static_build /opt/rundir/static
 # Make port 6543 available to the world outside this container
