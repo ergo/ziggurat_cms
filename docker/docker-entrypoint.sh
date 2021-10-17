@@ -9,11 +9,6 @@ if [ -n "${USER_GID}" ]; then
   groupmod -g $USER_GID application
 fi
 
-if [ ! -f /opt/rundir/config.ini ]; then
-  set +e
-  gosu application cp /opt/application/$APP_INI_FILE /opt/rundir/config.ini
-  set -e
-fi
 
 process_init_files() {
 	local f

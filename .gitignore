@@ -196,7 +196,7 @@ _testmain.go
 vendor/
 ### C template
 # Prerequisites
-*.d
+!*.d
 
 # Object files
 *.ko
@@ -243,5 +243,4 @@ Mkfile.old
 dkms.conf
 /development.ini
 /production.ini
-!/docker/docker-entrypoint-initdb.d/
 /rundir/

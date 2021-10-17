@@ -13,7 +13,7 @@ USER application
 COPY --chown=application frontend /opt/frontend
 WORKDIR /opt/frontend
 ENV FRONTEND_ASSSET_ROOT_DIR /opt/frontend/static_build
-COPY docker-entrypoint-static.sh /opt/docker-entrypoint-static.sh
+COPY docker/docker-entrypoint-static.sh /opt/docker-entrypoint-static.sh
 USER root
 ENTRYPOINT ["/opt/docker-entrypoint-static.sh"]
 CMD ["yarn", "dev"]

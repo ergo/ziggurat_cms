@@ -59,6 +59,9 @@ COPY --chown=application backend /opt/application
 # required to install additional modules
 COPY --chown=application frontend /opt/application_frontend
 # install the app, admin app and templates
+# https://thekev.in/blog/2016-11-18-python-in-docker/index.html
+# https://jbhannah.net/articles/python-docker-disappearing-egg-info
+ENV PYTHONPATH=/opt/application:/opt/application_frontend
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e .
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_front_admin
 RUN /opt/venv/bin/pip install --disable-pip-version-check --trusted-host pypi.python.org -e /opt/application_frontend/ziggurat_cms_front_front
@@ -71,7 +74,8 @@ USER root
 VOLUME /opt/application
 VOLUME /opt/application_frontend
 VOLUME /opt/rundir
-COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
+COPY docker/docker-entrypoint.sh /opt/docker-entrypoint.sh
+COPY docker/entrypoint.d /opt/entrypoint.d
 WORKDIR /opt/rundir
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 # Run application when the container launches

@@ -5,15 +5,13 @@ services:
     tty: true
     build: .
     ports:
-      - "6543:6543"
+      - "8081:6543"
     environment:
       APP_ENV: production
     volumes:
       - type: volume
         source: rundir
         target: /opt/rundir
-    networks:
-      - podswierkiem
     depends_on:
       - db
       - redis
@@ -33,14 +31,10 @@ services:
       - type: volume
         source: pg_data
         target: /var/lib/postgresql/data
-    networks:
-      - podswierkiem
   redis:
     image: redis:5.0.8
     ports:
       - "6379"
-    networks:
-      - podswierkiem
     volumes:
       - type: bind
         source: ./docker/redis/redis.conf
@@ -52,5 +46,3 @@ volumes:
   backend: {}
   frontend: {}
   pg_data: {}
-networks:
-  podswierkiem:
