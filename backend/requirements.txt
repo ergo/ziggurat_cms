@@ -27,7 +27,7 @@ six>=1.10.0
 SQLAlchemy==1.1.18
 text-unidecode==1.0
 transaction==3.0.0
-waitress==1.4.2
+waitress==2.1.1
 WebHelpers2==2.0
 webhelpers2-grid==0.9
 ziggurat-foundations==0.7.1
